@@ -1,0 +1,295 @@
+<html>  
+<head>
+</head>
+<body>  
+<b> AttackVector: </b><br>  
+<input type="radio" name="AttackVector" id="Network" value=0.85> Network <br>   
+<input type="radio" name="AttackVector" id="Adjacent" value=0.62> Adjacent <br>   
+<input type="radio" name="AttackVector" id="Local"  value=0.55> Local <br>  
+<input type="radio" name="AttackVector" id="Physical" value=0.2> Physical <br>
+<br><b> AttackComplexity: </b><br>  
+<input type="radio" name="AttackComplexity" id="Low" value=0.77> Low <br>   
+<input type="radio" name="AttackComplexity" id="High" value=0.44> High <br>
+<br><b> PrivilegesRequired: </b><br>  
+<input type="radio" name="PrivilegesRequired" id="None" value=0.85> None <br>   
+<input type="radio" name="PrivilegesRequired" id="Low" value=0.62> Low <br>   
+<input type="radio" name="PrivilegesRequired" id="High" value=0.27> High <br>
+<br><b> UserInteraction: </b><br>  
+<input type="radio" name="UserInteraction" id="None" value=0.85> None <br>   
+<input type="radio" name="UserInteraction" id="Required" value=0.62> Required  <br> 
+<br><b> Scope: </b><br>  
+<input type="radio" name="Scope" id="Unchanged" value=0.01> Unchanged <br>   
+<input type="radio" name="Scope" id="Changed" value=0.02> Changed   <br>
+<br><b> Confidentiality: </b><br>  
+<input type="radio" name="Confidentiality Impact" id="None" value=0> None <br>  
+<input type="radio" name="Confidentiality Impact" id="Low" value=0.22> Low <br>   
+<input type="radio" name="Confidentiality Impact" id="High" value=0.56> High   <br>
+<br><b> Integrity: </b><br>  
+<input type="radio" name="Integrity Impact" id="None" value=0> None <br>  
+<input type="radio" name="Integrity Impact" id="Low" value=0.22> Low <br>   
+<input type="radio" name="Integrity Impact" id="High" value=0.56> High   <br>
+<br><b> Availibility: </b><br>  
+<input type="radio" name="Availibility Impact" id="None" value=0> None <br>  
+<input type="radio" name="Availibility Impact" id="Low" value=0.22> Low <br>   
+<input type="radio" name="Availibility Impact" id="High" value=0.56> High   <br>
+
+<br><br>
+
+<button type="button" onclick=" checkButton()"> Submit </button>   
+<h3 id="disp1" style= "color:green"> </h3>  
+<h3 id="disp2" style= "color:green"> </h3>  
+<h3 id="disp3" style= "color:green"> </h3>  
+<h3 id="disp4" style= "color:green"> </h3>
+<h3 id="disp5" style= "color:green"> </h3>
+<h3 id="disp6" style= "color:green"> </h3>
+<h3 id="disp7" style= "color:green"> </h3>
+<h3 id="disp8" style= "color:green"> </h3>
+<h4 id="error" style= "color:red"> </h4>
+<h4 id="final" style= "color:black"> </h4>  
+<h4 id="final1" style= "color:red"> </h4>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<canvas id="my_Chart" style="width:100%;max-width:400px"></canvas>
+
+
+</body>  
+<script> 
+	
+	function checkButton() 
+	{    
+		var getSelectedValue1 = document.querySelector('input[name="AttackVector"]:checked');                   
+		var result=8.22;
+		var result1=1;
+		if(getSelectedValue1 != null) 
+		{   
+			var x = getSelectedValue1.value;
+			var result = Number(result) * Number(x);
+			document.getElementById("disp1").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp1").innerHTML = "You have not selected any AttackVector";   
+		}   
+		var getSelectedValue2 = document.querySelector('input[name="AttackComplexity"]:checked');                  
+		if(getSelectedValue2 != null) 
+		{   
+			var x = getSelectedValue2.value;
+			var result = Number(result) * Number(x);
+			document.getElementById("disp2").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp2").innerHTML = "You have not selected any AttackComplexity";   
+		}
+		var getSelectedValue3 = document.querySelector('input[name="PrivilegesRequired"]:checked');                  
+		var getSelectedValue5 = document.querySelector('input[name="Scope"]:checked');                  
+		if(getSelectedValue3 != null) 
+		{   
+			var x = getSelectedValue3.value;
+			if(getSelectedValue5.value == 0.01)
+			{
+				var x = getSelectedValue3.value;
+			}
+			else if(getSelectedValue5.value == 0.02)
+			{
+				if(getSelectedValue3.value==0.62)
+				{
+					x=0.68;
+				}
+				else if(getSelectedValue3.value==0.27)
+				{
+					x=x+0.23;
+				}
+			}
+			var result = Number(result) * Number(x);
+			document.getElementById("disp3").innerHTML = "";   
+			
+		}   
+		else 
+		{   
+                	document.getElementById("disp3").innerHTML = "You have not selected any PrivilegesRequired";   
+		}
+		var getSelectedValue4 = document.querySelector('input[name="UserInteraction"]:checked');                  
+		if(getSelectedValue4 != null) 
+		{   
+			var x = getSelectedValue4.value;
+			var result = Number(result) * Number(x);
+			document.getElementById("disp4").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp4").innerHTML = "You have not selected any UserInteraction";   
+		}
+		var getSelectedValue5 = document.querySelector('input[name="Scope"]:checked');                  
+		if(getSelectedValue5 != null) 
+		{   
+			var x = getSelectedValue5.value;
+			document.getElementById("disp5").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp5").innerHTML = "You have not selected any Scope";   
+		}
+		var getSelectedValue6 = document.querySelector('input[name="Confidentiality Impact"]:checked');                  
+		if(getSelectedValue6 != null) 
+		{   
+			var x = getSelectedValue6.value;
+			var result1 = Number(result1) * (1-Number(x));
+			document.getElementById("disp6").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp6").innerHTML = "You have not selected any Confidentiality Impact";   
+		}
+		var getSelectedValue7 = document.querySelector('input[name="Integrity Impact"]:checked');                  
+		if(getSelectedValue7 != null) 
+		{   
+			var x = getSelectedValue7.value;
+			var result1 = Number(result1) * (1-Number(x));
+			document.getElementById("disp7").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp7").innerHTML = "You have not selected any Integrity Impact";   
+		}
+		var getSelectedValue8 = document.querySelector('input[name="Availibility Impact"]:checked');                  
+		if(getSelectedValue8 != null) 
+		{   
+			var x = getSelectedValue8.value;
+			var result1 = Number(result1) * (1-Number(x));
+			document.getElementById("disp8").innerHTML = "";   
+		}   
+		else 
+		{   
+                	document.getElementById("disp8").innerHTML = "You have not selected any Availibility Impact";   
+		}
+		var iss=1-Number(result1);
+		var impact=1;
+		var a,b,c,d,e;
+		if(getSelectedValue5.value == 0.01)
+		{
+			impact=impact*6.42*iss;
+		}
+		else if(getSelectedValue5.value == 0.02)
+		{
+			a=iss-0.029;
+			b=iss-0.02;
+			c=b**15;
+			d=7.52*a;
+			e=3.25*c;
+			impact=d-e;
+		}
+		var ans=result+impact;
+		var ans1=1.08*(result+impact);
+		var basescore;
+		var g,h;
+		if(getSelectedValue5.value == 0.01)
+		{
+			basescore=Math.min(ans,10);
+		}
+		else if(getSelectedValue5.value == 0.02)
+		{
+			basescore=Math.min(ans1,10);
+		}
+		
+		if(getSelectedValue1.value == null || getSelectedValue2.value == null || getSelectedValue3.value == null || getSelectedValue4.value == null || getSelectedValue5.value == null || getSelectedValue6.value == null || getSelectedValue7.value == null || getSelectedValue8.value == null)
+		{
+			var myData = {
+				labels: ["Basescore", "Impact", "Exploitability"],
+				datasets: [{
+					label: "CVSS GRAPH",
+					fill: false,
+					backgroundColor: ['#ff0000', '#ff4000', '#ff8000'],
+					borderColor: 'black',
+					data: [0,0,0],
+				}]
+			};
+
+			var myoption = {
+				tooltips: {
+					enabled: true
+				},
+				hover: {
+					animationDuration: 1
+				},
+				animation: {
+				duration: 1,
+				onComplete: function () {
+					var chartInstance = this.chart,
+						ctx = chartInstance.ctx;
+						ctx.textAlign = 'center';
+						ctx.fillStyle = "rgba(0, 0, 0, 1)";
+						ctx.textBaseline = 'bottom';
+
+						this.data.datasets.forEach(function (dataset, i) {
+							var meta = chartInstance.controller.getDatasetMeta(i);
+							meta.data.forEach(function (bar, index) {
+								var data = dataset.data[index];
+								ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+							});
+						});
+					}
+				}
+			};
+
+			var ctx = document.getElementById('my_Chart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',    	// Define chart type
+				data: myData,    	// Chart data
+				options: myoption 	// Chart Options [This is optional paramenter use to add some extra things in the chart].
+			});
+		}
+
+		else
+		{
+			var myData = {
+				labels: ["Basescore", "Impact", "Exploitability"],
+				datasets: [{
+					label: "CVSS GRAPH",
+					fill: false,
+					backgroundColor: ['#ff0000', '#ff0000', '#ff0000'],
+					borderColor: 'black',
+					data: [basescore,impact,result],
+				}]
+			};
+
+			var myoption = {
+				tooltips: {
+					enabled: true
+				},
+				hover: {
+					animationDuration: 1
+				},
+				animation: {
+				duration: 1,
+				onComplete: function () {
+					var chartInstance = this.chart,
+						ctx = chartInstance.ctx;
+						ctx.textAlign = 'center';
+						ctx.fillStyle = "rgba(0, 0, 0, 1)";
+						ctx.textBaseline = 'bottom';
+
+						this.data.datasets.forEach(function (dataset, i) {
+							var meta = chartInstance.controller.getDatasetMeta(i);
+							meta.data.forEach(function (bar, index) {
+								var data = dataset.data[index];
+								ctx.fillText(data, bar._model.x, bar._model.y - 5);
+
+							});
+						});
+					}
+				}
+			};
+
+
+			var ctx = document.getElementById('my_Chart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: myData,
+				options: myoption
+			});
+		}
+	}    
+</script>
+</html>  
